@@ -1,0 +1,83 @@
+-- MySQL dump 10.13  Distrib 5.7.33, for Linux (x86_64)
+--
+-- Host: localhost    Database: College
+-- ------------------------------------------------------
+-- Server version	5.7.33-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `College`
+--
+
+DROP TABLE IF EXISTS `College`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `College` (
+  `college-code` int(11) NOT NULL,
+  `college-name` varchar(50) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`college-code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `College`
+--
+
+LOCK TABLES `College` WRITE;
+/*!40000 ALTER TABLE `College` DISABLE KEYS */;
+INSERT INTO `College` VALUES (1,'CEC','Chengannur'),(2,'NIT','Calicut'),(3,'CET','Trivandrum');
+/*!40000 ALTER TABLE `College` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Faculty`
+--
+
+DROP TABLE IF EXISTS `Faculty`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Faculty` (
+  `college-code` int(11) DEFAULT NULL,
+  `faculty-code` varchar(50) NOT NULL,
+  `faculty-name` varchar(50) DEFAULT NULL,
+  `qualification` varchar(50) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `experience` int(11) DEFAULT NULL,
+  `department` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`faculty-code`),
+  KEY `college-code` (`college-code`),
+  CONSTRAINT `Faculty_ibfk_1` FOREIGN KEY (`college-code`) REFERENCES `College` (`college-code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Faculty`
+--
+
+LOCK TABLES `Faculty` WRITE;
+/*!40000 ALTER TABLE `Faculty` DISABLE KEYS */;
+INSERT INTO `Faculty` VALUES (1,'100','Arpan','B.Ed','Chengannur',3,'Computer'),(1,'101','Ashna','M.Ed','Chengannur',10,'Computer'),(1,'102','Dan','M.Tech','Kottayam',4,'Electronics'),(2,'103','Anziya','B.Tech','Kollam',1,'Electronics'),(2,'104','Aparna','M.Ed','Cochin',6,'Computer'),(3,'105','Gowri','M.Ed','Kottayam',8,'Computer'),(3,'106','Srirang','Phd','Calicut',8,'Electronics'),(3,'107','Bilal','B.Ed','Allappuzha',8,'Computer'),(3,'108','Athul','M.Tech','Allappuzha',1,'Electronics'),(2,'109','Ashwin','B.Tech','Allappuzha',3,'Electronics'),(2,'110','Athira','B.Tech','Allappuzha',11,'Computer'),(2,'111','Athulya','M.Tech','Allappuzha',15,'Electronics');
+/*!40000 ALTER TABLE `Faculty` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-07 12:31:19
