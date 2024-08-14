@@ -1,0 +1,134 @@
+-- MySQL dump 10.13  Distrib 5.7.33, for Linux (x86_64)
+--
+-- Host: localhost    Database: company
+-- ------------------------------------------------------
+-- Server version	5.7.33-0ubuntu0.16.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Department`
+--
+
+DROP TABLE IF EXISTS `Department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Department` (
+  `dept_no` varchar(10) NOT NULL,
+  `dept_name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`dept_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Department`
+--
+
+LOCK TABLES `Department` WRITE;
+/*!40000 ALTER TABLE `Department` DISABLE KEYS */;
+INSERT INTO `Department` VALUES ('D01','CS'),('D02','EC'),('D03','EE'),('D04','AI'),('D05','ML'),('D06','R&D'),('D07','MECH'),('D08','CIVIL'),('D09','Data Sci');
+/*!40000 ALTER TABLE `Department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Employee`
+--
+
+DROP TABLE IF EXISTS `Employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Employee` (
+  `emp_no` varchar(10) NOT NULL,
+  `emp_name` varchar(10) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `address` text,
+  `mobile_no` int(11) DEFAULT NULL,
+  `dept_no` varchar(10) DEFAULT NULL,
+  `salary` int(11) DEFAULT NULL,
+  `Designation` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`emp_no`),
+  KEY `dept_no` (`dept_no`),
+  CONSTRAINT `Employee_ibfk_1` FOREIGN KEY (`dept_no`) REFERENCES `Department` (`dept_no`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Employee`
+--
+
+LOCK TABLES `Employee` WRITE;
+/*!40000 ALTER TABLE `Employee` DISABLE KEYS */;
+INSERT INTO `Employee` VALUES ('emp1','John','2004-09-01','Kochi',111,'D01',2500,'Manager'),('emp2','Ashna','2004-05-11','Kochi',111,'D03',50000,'Manager'),('emp3','Arpan','2004-02-19','Kochi',222,'D05',7000,'Computer Assitant'),('emp4','Anziya','2004-09-20','Calicut',444,'D05',200000,'Manager'),('emp5','Aparna','2004-12-21','Kollam',555,'D01',250000,'Admin'),('emp6','Athul','2004-11-25','Kochi',666,'D01',5000,'Dev'),('emp7','Joe','2004-10-22','Kannur',777,'D03',2000,'inter'),('emp8','Srirang','2004-01-27','Vadakar',888,'D07',10000,'Manager');
+/*!40000 ALTER TABLE `Employee` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Orders`
+--
+
+DROP TABLE IF EXISTS `Orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Orders` (
+  `OrderID` int(11) NOT NULL,
+  `OrderNumber` int(11) NOT NULL,
+  `PersonID` int(11) DEFAULT NULL,
+  KEY `PersonID` (`PersonID`),
+  CONSTRAINT `Orders_ibfk_1` FOREIGN KEY (`PersonID`) REFERENCES `Persons` (`PersonID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Orders`
+--
+
+LOCK TABLES `Orders` WRITE;
+/*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Persons`
+--
+
+DROP TABLE IF EXISTS `Persons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Persons` (
+  `PersonID` int(11) NOT NULL,
+  `Name` varchar(10) NOT NULL,
+  `Aadhar` int(11) NOT NULL,
+  `Age` int(11) DEFAULT NULL,
+  PRIMARY KEY (`PersonID`),
+  UNIQUE KEY `Aadhar` (`Aadhar`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Persons`
+--
+
+LOCK TABLES `Persons` WRITE;
+/*!40000 ALTER TABLE `Persons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Persons` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-14 12:41:08
